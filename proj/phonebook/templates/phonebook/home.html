@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Phone book</title>
+  </head>
+  <body>
+   <div class="container">
+       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Phone book</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">All</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add' %}">Add</a>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+     <div class="cart">
+       <div class="car-body">
+         <h5 class="cart-title">Search</h5>
+         <p class="cart-text">
+           <div class="row">
+         <div class="col-6">
+           <form action="" method="get">
+             <div class="form-group form row">
+               <div class="col-10">
+                 <input type="text" class="form-control" name="query" placeholder="Search by name">
+                 <input type="hidden" name="search_by" value="name">
+               </div>
+               <div class="col-2">
+                 <button type="submit" class="btn btn-success">Search</button>
+               </div>
+             </div>
+           </form>
+         </div>
+        <div class="col-6">
+           <form action="" method="get">
+             <div class="form-group form row">
+               <div class="col-10">
+                 <input type="text" class="form-control" name="query" placeholder="Search by phone">
+                 <input type="hidden" name="search_by" value="phone">
+               </div>
+               <div class="col-2">
+                 <button type="submit" class="btn btn-success">Search</button>
+               </div>
+             </div>
+           </form>
+       </div>
+         </p>
+       </div>
+     </div>
+     <div class="card">
+       <div class="card-body">
+         <h5 class="card-title">Phones</h5>
+         <h6 class="card-subtitle">{{search_message}}</h6>
+         <p class="card-text">
+           <table class="table">
+         <thead>
+         <tr>
+           <th scope="col">#</th>
+           <th scope="col">Name</th>
+           <th scope="col">Phones</th>
+           <th scope="col">Actions</th>
+         </tr>
+         </thead>
+         <tbody>
+         {% for persone in persones %}
+         <tr>
+           <th scope="row">{{ persone.pk }}</th>
+           <th>{{ persone.name }}</th>
+           <th>{{ persone.all_phones_to_string }}</th>
+           <th><a href="{% url 'delete' persone.pk %}" class="btn btn-sm btn-danger">Delete</a></th>
+         </tr>
+         {% endfor %}
+         </tbody>
+       </table>
+         </p>
+
+       </div>
+     </div>
+
+   </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
